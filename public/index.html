@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather API</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <img src="../public/src/weather.jpg" alt="" />
+    <main class="w-full flex h-screen justify-center items-center">
+      <section
+        class="container flex flex-col gap-5 w-1/4 h-2/4 py-4 ps-3 rounded-xl shadow-xl"
+      >
+        <div class="w-full h-3/4 flex flex-col items-center gap-2">
+          <h1 class="title text-4xl">Buscador del Clima</h1>
+          <div class="contain flex flex-col items-center" id="result">
+            <p class="font-light text-sm">Agregue ciudad y pais</p>
+            <h5 class="font-bold text-2xl">Clima de Bogota</h5>
+
+            <h2 class="number text-8xl font-bold">28°C</h2>
+            <p class="number text-3xl font-semibold">Max: 29°C</p>
+            <p class="number text-3xl font-semibold">Min: 27°C</p>
+          </div>
+        </div>
+        <form
+          action=""
+          method="POST"
+          id="getWeather"
+          class="block flex flex-col gap-5 items-center"
+        >
+          <input
+            class="input-text w-[90%] outline-none text-black rounded-xl ps-3"
+            type="text"
+            name="city"
+            id="city"
+            placeholder="Indique la ciudad"
+          />
+          <select class="text-black w-9/12" name="" id="country"></select>
+          <input type="submit" value="Get Weather" class="" />
+        </form>
+      </section>
+    </main>
+    <script src="js/main.js"></script>
+  </body>
+</html>

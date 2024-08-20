@@ -16,11 +16,14 @@ body img {
 .container {
   font-family: var(--Ubuntu);
   font-weight: 400;
-  background: #fafafa10;
+  background: rgb(180, 214, 205, 0.4);
   backdrop-filter: blur(0.4rem);
 }
 .title {
   font-weight: 800;
+}
+.city-img {
+  display: none;
 }
 .number {
   font-family: var(--jersey);
@@ -31,6 +34,18 @@ body img {
 }
 
 .input-text {
-  background: #00000010;
+  background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(0.4rem);
+}
+
+.submit {
+  padding: 5px;
+  background-color: #b4d6cd;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.submit:hover {
+  transform: scale(1.2);
+  background-color: #ffda76;
 }

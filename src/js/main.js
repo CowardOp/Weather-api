@@ -54,6 +54,7 @@ const countries = [
   "El Salvador",
   "Equatorial Guinea",
   "Eritrea",
+  "España",
   "Estonia",
   "Eswatini (fmr. 'Swaziland')",
   "Ethiopia",
@@ -199,7 +200,7 @@ const countries = [
 ];
 const result = document.getElementById("result");
 const form = document.getElementById("getWeather");
-const city = document.getElementById("city");
+const nameCity = document.getElementById("city");
 const select = document.getElementById("country");
 
 countries.forEach((country) => {
@@ -212,12 +213,61 @@ countries.forEach((country) => {
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  if (city.value === "" || select.value === "País") {
+  if (nameCity.value === "" || select.value === "País") {
     showError("Ambos campos son obligatorios");
   }
-  console.log(city.value);
-  console.log(select.value);
+  // console.log(city.value);
+  // console.log(select.value);
+  callAPI(city.value);
 });
+function callAPI(city, country) {
+  const apiId = "0b5ef3dc4b424b3cb6b0bb6dc52b73ea";
+  const url = `http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${apiId}`;
+  // http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${apiId}}
+
+  fetch(url)
+    .then((data) => {
+      return data.json();
+    })
+    .then((dataJSON) => {
+      if (dataJSON.cod === "404") {
+        showError("Ciudad no encontrada...");
+      } else {
+        showWeather(dataJSON);
+      }
+      // console.log(dataJSON);
+    });
+}
+function showWeather(data) {
+  const {
+    name,
+    main: { temp, temp_max, temp_min },
+    weather: [arr],
+  } = data;
+
+  const degrees = kelvinConvert(temp);
+  const max = kelvinConvert(temp_max);
+  const min = kelvinConvert(temp_min);
+
+  let cityName = document.getElementById("cityName");
+  let cityImg = document.getElementById("cityImg");
+  let cityTemp = document.getElementById("cityTemp");
+  let cityMaxTemp = document.getElementById("cityMaxTemp");
+  let cityMinTemp = document.getElementById("cityMinTemp");
+
+  cityName.textContent = `Clima de ${name}`;
+  cityImg.src = `https://openweathermap.org/img/wn/${arr.icon}@2x.png`;
+  cityImg.classList.remove("city-img");
+  cityTemp.textContent = `${degrees}C°`;
+  cityMaxTemp.textContent = `Max: ${max}C°`;
+  cityMinTemp.textContent = `Min: ${min}C°`;
+
+  console.log(name);
+  console.log(temp);
+  console.log(temp_max);
+  console.log(temp_min);
+  console.log(arr.icon);
+}
 
 function showError(message) {
   console.log(message);
@@ -228,5 +278,9 @@ function showError(message) {
 
   setTimeout(() => {
     alert.remove();
-  }, 2000);
+  }, 1000);
+}
+
+function kelvinConvert(temp) {
+  return parseInt(temp - 273.15);
 }

@@ -22,12 +22,16 @@ body img {
 .title {
   font-weight: 800;
 }
+.weather-city {
+  transition: all 0.4s ease;
+}
 .city-img {
   display: none;
 }
 .number {
   font-family: var(--jersey);
   font-weight: 400;
+  transition: all 0.4s ease;
 }
 .anim {
   color: #c7253e;

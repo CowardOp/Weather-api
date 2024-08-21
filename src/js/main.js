@@ -1,5 +1,5 @@
 const countries = [
-  "País",
+  "",
   "Afghanistan",
   "Albania",
   "Algeria",
@@ -203,17 +203,17 @@ const form = document.getElementById("getWeather");
 const nameCity = document.getElementById("city");
 const select = document.getElementById("country");
 
-countries.forEach((country) => {
+countries.forEach((allCountry) => {
   const option = document.createElement("option");
-  option.value = country.toLowerCase().replace(/ /g, "-");
-  option.textContent = country;
+  option.value = allCountry.toLowerCase().replace(/ /g, "-");
+  option.textContent = allCountry;
   select.appendChild(option);
 });
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  if (nameCity.value === "" || select.value === "País") {
+  if (nameCity.value === "" || country.value === "") {
     showError("Ambos campos son obligatorios");
   }
   // console.log(city.value);
@@ -249,11 +249,11 @@ function showWeather(data) {
   const max = kelvinConvert(temp_max);
   const min = kelvinConvert(temp_min);
 
-  let cityName = document.getElementById("cityName");
-  let cityImg = document.getElementById("cityImg");
-  let cityTemp = document.getElementById("cityTemp");
-  let cityMaxTemp = document.getElementById("cityMaxTemp");
-  let cityMinTemp = document.getElementById("cityMinTemp");
+  let cityName = añadir("cityName");
+  let cityImg = añadir("cityImg");
+  let cityTemp = añadir("cityTemp");
+  let cityMaxTemp = añadir("cityMaxTemp");
+  let cityMinTemp = añadir("cityMinTemp");
 
   cityName.textContent = `Clima de ${name}`;
   cityImg.src = `https://openweathermap.org/img/wn/${arr.icon}@2x.png`;
@@ -262,11 +262,39 @@ function showWeather(data) {
   cityMaxTemp.textContent = `Max: ${max}C°`;
   cityMinTemp.textContent = `Min: ${min}C°`;
 
-  console.log(name);
-  console.log(temp);
-  console.log(temp_max);
-  console.log(temp_min);
-  console.log(arr.icon);
+  cityTemp.classList.remove("color-blue", "color-warm", "color-yellow", "anim");
+  cityMaxTemp.classList.remove(
+    "color-blue",
+    "color-warm",
+    "color-yellow",
+    "anim"
+  );
+  cityMinTemp.classList.remove(
+    "color-blue",
+    "color-warm",
+    "color-yellow",
+    "anim"
+  );
+
+  if (degrees <= 15 || max <= 15 || min <= 15) {
+    cityTemp.classList.add("color-blue");
+    cityMaxTemp.classList.add("color-blue");
+    cityMinTemp.classList.add("color-blue");
+  } else if (degrees >= 35 || max >= 35 || min >= 35) {
+    cityTemp.classList.add("color-warm");
+    cityMaxTemp.classList.add("color-warm");
+    cityMinTemp.classList.add("color-warm");
+  } else {
+    cityTemp.classList.add("color-yellow");
+    cityMaxTemp.classList.add("color-yellow");
+    cityMinTemp.classList.add("color-yellow");
+  }
+
+  // console.log(name);
+  // console.log(temp);
+  // console.log(temp_max);
+  // console.log(temp_min);
+  // console.log(arr.icon);
 }
 
 function showError(message) {
@@ -283,4 +311,9 @@ function showError(message) {
 
 function kelvinConvert(temp) {
   return parseInt(temp - 273.15);
+}
+
+function añadir(clase) {
+  let cambio = document.getElementById(clase);
+  return cambio;
 }

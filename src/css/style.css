@@ -29,8 +29,12 @@ body img {
   font-family: var(--jersey);
   font-weight: 400;
 }
+.anim {
+  color: #c7253e;
+  animation: parpadeo 1s infinite alternate;
+}
 .alert-message {
-  color: red;
+  color: #e4003a;
 }
 
 .input-text {
@@ -48,4 +52,29 @@ body img {
 .submit:hover {
   transform: scale(1.2);
   background-color: #ffda76;
+}
+
+.color-blue {
+  color: #77e4c8;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+.color-yellow {
+  color: #fabc3f;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+.color-warm {
+  color: #800000;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+@keyframes parpadeo {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
